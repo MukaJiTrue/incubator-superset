@@ -2509,6 +2509,87 @@ class EventFlowViz(BaseViz):
     def get_data(self, df):
         return df.to_dict(orient='records')
 
+class KeplerViz(BaseViz):
+
+     """A visualization to explore patterns in event sequences"""
+
+     viz_type = 'kepler'
+     verbose_name = _('Kepler')
+     is_timeseries = False
+
+     def query_obj(self):
+         d = super(KeplerViz, self).query_obj()
+         fd = self.form_data
+
+         d['columns'] = fd.get('all_columns')
+         d['groupby'] = []
+         order_by_cols = fd.get('order_by_cols') or []
+         d['orderby'] = [json.loads(t) for t in order_by_cols]
+         return d
+
+     def get_data(self, df):
+         features = df.to_dict(orient='records')
+         return {
+             'mapboxApiAccessToken': config.get('MAPBOX_API_KEY'),
+             'features': features,
+         }
+
+#MukaJi
+'''
+class TrueViz(BaseViz):
+
+     """A visualization to explore patterns in event sequences"""
+
+     viz_type = 'true'
+     verbose_name = _('True')
+     is_timeseries = False
+
+     def query_obj(self):
+         d = super(TrueViz, self).query_obj()
+         fd = self.form_data
+
+         d['columns'] = fd.get('all_columns')
+         d['groupby'] = []
+         order_by_cols = fd.get('order_by_cols') or []
+         d['orderby'] = [json.loads(t) for t in order_by_cols]
+         return d
+
+     def get_data(self, df):
+         features = df.to_dict(orient='records')
+         return {
+             'mapboxApiAccessToken': config.get('MAPBOX_API_KEY'),
+             'features': features,
+         }
+'''
+class TruePolygon(DeckPathViz):
+
+    """True Polygon Layer"""
+
+    #viz_type = 'true'
+    #deck_viz_key = 'true'
+    viz_type = 'true_polygon'
+    deck_viz_key = 'polygon'
+    verbose_name = _('True - Polygon')
+
+    def query_obj(self):
+        fd = self.form_data
+        self.elevation = (
+            fd.get('point_radius_fixed') or {'type': 'fix', 'value': 500})
+        return super(TruePolygon, self).query_obj()
+
+    def get_metrics(self):
+        metrics = [self.form_data.get('metric')]
+        if self.elevation.get('type') == 'metric':
+            metrics.append(self.elevation.get('value'))
+        return [metric for metric in metrics if metric]
+
+    def get_properties(self, d):
+        super(TruePolygon, self).get_properties(d)
+        fd = self.form_data
+        elevation = fd['point_radius_fixed']['value']
+        type_ = fd['point_radius_fixed']['type']
+        d['elevation'] = d.get(elevation) if type_ == 'metric' else elevation
+        return d
 
 class PairedTTestViz(BaseViz):
 
