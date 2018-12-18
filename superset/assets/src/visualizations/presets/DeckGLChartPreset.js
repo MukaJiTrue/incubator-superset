@@ -9,7 +9,7 @@ import PathChartPlugin from '../deckgl/layers/Path/PathChartPlugin';
 import PolygonChartPlugin from '../deckgl/layers/Polygon/PolygonChartPlugin';
 import ScatterChartPlugin from '../deckgl/layers/Scatter/ScatterChartPlugin';
 import ScreengridChartPlugin from '../deckgl/layers/Screengrid/ScreengridChartPlugin';
-//MukaJi: Add True plugin
+// MukaJi: Add True plugin
 import TrueArcChartPlugin from '../True/layers/Arc/ArcChartPlugin';
 import TrueGeoJsonChartPlugin from '../True/layers/Geojson/GeojsonChartPlugin';
 import TrueGridChartPlugin from '../True/layers/Grid/GridChartPlugin';
