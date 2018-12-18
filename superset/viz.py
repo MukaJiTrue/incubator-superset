@@ -2534,33 +2534,7 @@ class KeplerViz(BaseViz):
              'features': features,
          }
 
-#MukaJi
-'''
-class TrueViz(BaseViz):
-
-     """A visualization to explore patterns in event sequences"""
-
-     viz_type = 'true'
-     verbose_name = _('True')
-     is_timeseries = False
-
-     def query_obj(self):
-         d = super(TrueViz, self).query_obj()
-         fd = self.form_data
-
-         d['columns'] = fd.get('all_columns')
-         d['groupby'] = []
-         order_by_cols = fd.get('order_by_cols') or []
-         d['orderby'] = [json.loads(t) for t in order_by_cols]
-         return d
-
-     def get_data(self, df):
-         features = df.to_dict(orient='records')
-         return {
-             'mapboxApiAccessToken': config.get('MAPBOX_API_KEY'),
-             'features': features,
-         }
-'''
+#START: MukaJi add new visualizations
 class TruePolygon(DeckPathViz):
 
     """True Polygon Layer"""
@@ -2590,6 +2564,32 @@ class TruePolygon(DeckPathViz):
         type_ = fd['point_radius_fixed']['type']
         d['elevation'] = d.get(elevation) if type_ == 'metric' else elevation
         return d
+class TrueKeplerViz(BaseViz):
+
+     """A visualization to explore patterns in event sequences"""
+
+     viz_type = 'true_kepler'
+     verbose_name = _('True Kepler')
+     is_timeseries = False
+
+     def query_obj(self):
+         d = super(TrueKeplerViz, self).query_obj()
+         fd = self.form_data
+
+         d['columns'] = fd.get('all_columns')
+         d['groupby'] = []
+         order_by_cols = fd.get('order_by_cols') or []
+         d['orderby'] = [json.loads(t) for t in order_by_cols]
+         return d
+
+     def get_data(self, df):
+         features = df.to_dict(orient='records')
+         return {
+             'mapboxApiAccessToken': config.get('MAPBOX_API_KEY'),
+             'features': features,
+         }
+
+#END: MukaJi add new visualizations
 
 class PairedTTestViz(BaseViz):
 

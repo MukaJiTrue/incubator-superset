@@ -55,6 +55,7 @@ import DeckScatter from './DeckScatter';
 import DeckScreengrid from './DeckScreengrid';
 import Kepler from './Kepler';
 import TruePolygon from './TruePolygon';
+import TrueKepler from './TrueKepler';
 
 export const controlPanelConfigs = {
   area: Area,
@@ -107,6 +108,7 @@ export const controlPanelConfigs = {
   deck_screengrid: DeckScreengrid,
   kepler: Kepler,
   true_polygon: TruePolygon,
+  true_kepler: TrueKepler,
 };
 
 export default controlPanelConfigs;

@@ -19,7 +19,7 @@ import TruePathChartPlugin from '../True/layers/Path/PathChartPlugin';
 import TruePolygonChartPlugin from '../True/layers/Polygon/PolygonChartPlugin';
 import TrueScatterChartPlugin from '../True/layers/Scatter/ScatterChartPlugin';
 import TrueScreengridChartPlugin from '../True/layers/Screengrid/ScreengridChartPlugin';
-
+import TrueKeplerChartPlugin from '../True/layers/Kepler/KeplerChartPlugin';
 export default class DeckGLChartPreset extends Preset {
   constructor() {
     super({
@@ -44,6 +44,7 @@ export default class DeckGLChartPreset extends Preset {
         new TruePolygonChartPlugin().configure({ key: 'true_polygon' }),
         new TrueScatterChartPlugin().configure({ key: 'true_scatter' }),
         new TrueScreengridChartPlugin().configure({ key: 'true_screengrid' }),
+        new TrueKeplerChartPlugin().configure({ key: 'true_kepler' }), 
       ],
     });
   }
